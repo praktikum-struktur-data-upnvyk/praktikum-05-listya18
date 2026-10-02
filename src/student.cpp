@@ -111,45 +111,40 @@ bool kurungSeimbang(const string& ekspresi) {
     inisialisasi(s);
 
     for (char karakter : ekspresi){
-        if (karakter == '('){
+        if (karakter == '(' ) {
             push(s, '(');
         }
         else if (karakter == '['){
             push(s, '[');
         }
-        else if (karakter == '['){
+        else if (karakter == '{'){
             push(s, '{');
         }
 
-        else if (karakter == ')' ||
-                 karakter == ']' ||
-                 karakter == '}') {
-
+        else if (karakter == ')' || karakter == ']' || karakter == '}'){
             int nilai;
-if (!pop(s, nilai)){
+            if (!pop(s, nilai)){
                 return false;
-            }   
+            }
+            if (karakter == ')' && nilai !='('){
+                clear(s);
+                return false;
+            }
+             if (karakter == ']' && nilai !='['){
+                clear(s);
+                return false;
+            }
+             if (karakter == '}' && nilai !='{'){
+                clear(s);
+                return false;
+            }
             
-            if (karakter == ')' && nilai != '('){
-                clear(s);
-                return false;
-            }
-
-            if (karakter == ']' && nilai != '['){
-                clear(s);
-                return false;
-}
-            if (karakter == '}' && nilai != '{'){
-                clear(s);
-                return false;
-            }
         }
+           
     }
 
     bool seimbang = isEmpty(s);
-
     clear(s);
-
     return seimbang;
 }
 
